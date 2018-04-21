@@ -39,9 +39,10 @@ def return_msg():
     checksum = sha256(sha256(payload).digest()).digest()[:4]
 
     msg = magic + command + length + checksum + payload
+    
+    return msg
 
-
-msg = return_msg
+msg = return_msg()
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -50,3 +51,4 @@ s.connect((HOST, PORT))
 s.send(msg)
 
 s.recv(1024)
+
